@@ -1,6 +1,6 @@
 # weatherapp Android
 
-A weather app that shows daily weather conditions, and weather forecasts; built with `Kotlin` using `MVVM` and `Clean Architecture` design pattern which uses `weatherapi`.
+A weather app that shows daily weather conditions, and weather forecasts; built with `Kotlin` using `MVVM` and `Clean Architecture` design pattern which uses `weatherapi` for weather data.
 
 ### Screenshots
 
