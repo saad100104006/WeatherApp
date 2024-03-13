@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Navigation -->
+    <dimen name="navigation_bar_height">56dp</dimen>
+
+    <!-- Element spacing -->
+    <dimen name="element_spacing_tiny">4dp</dimen>
+    <dimen name="element_spacing_small">8dp</dimen>
+    <dimen name="element_spacing_medium">16dp</dimen>
+    <dimen name="element_spacing_large">28dp</dimen>
+    <dimen name="element_spacing_xlarge">36dp</dimen>
+
+</resources>

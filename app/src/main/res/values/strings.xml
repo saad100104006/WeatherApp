@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Weather</string>
+
+    <!-- Content Description -->
+    <string name="content_description_saved_regions">Saved regions</string>
+    <string name="content_description_search_regions">Search regions</string>
+    <string name="content_description_date">Date</string>
+    <string name="content_description_wind">Wind</string>
+    <string name="content_description_none">None</string>
+
+    <!-- Weather -->
+    <string name="weather_stat_wind">Wind</string>
+    <string name="weather_stat_temperature">Temperature</string>
+    <string name="weather_stat_humidity">Humidity</string>
+    <string name="weather_stat_rain">Rain</string>
+    <string name="degree_centigrade_placeholder">°C</string>
+
+    <!-- Quantity -->
+    <string name="quantity_centigrade">%.1f°C</string>
+    <string name="quantity_kilometer_per_hour">%.1f km/hr</string>
+    <string name="quantity_percent">%.1f\%%</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="internet_disconnected">Internet is Disconnected</string>
+    <string name="error_location">Location update is not available</string>
+
+</resources>
