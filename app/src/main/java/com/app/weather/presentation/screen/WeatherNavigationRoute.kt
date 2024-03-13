@@ -29,7 +29,6 @@ sealed class WeatherNavigationRoute {
         }
     }
 
-
     object Search : WeatherNavigationRoute() {
         fun getName(): String {
             return "search"

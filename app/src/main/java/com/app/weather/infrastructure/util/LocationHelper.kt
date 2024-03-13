@@ -9,7 +9,6 @@ import android.location.Geocoder
 import android.location.Location
 import android.net.ConnectivityManager
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
@@ -93,12 +92,12 @@ class LocationHelper(
         // inexact. You may not receive updates at all if no location sources are available, or
         // you may receive them slower than requested. You may also receive updates faster than
         // requested if other applications are requesting location at a faster interval.
-        mLocationRequest!!.interval = UPDATE_INTERVAL_IN_MILLISECONDS
+        mLocationRequest?.interval = UPDATE_INTERVAL_IN_MILLISECONDS
 
         // Sets the fastest rate for active location updates. This interval is exact, and your
         // application will never receive updates faster than this value.
-        mLocationRequest!!.fastestInterval = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
-        mLocationRequest!!.priority =
+        mLocationRequest?.fastestInterval = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
+        mLocationRequest?.priority =
             LocationRequest.PRIORITY_HIGH_ACCURACY
     }
 
@@ -110,11 +109,15 @@ class LocationHelper(
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED
             ) {
-                fusedLocationProviderClient.requestLocationUpdates(
-                    mLocationRequest!!,
-                    mLocationCallback,
-                    Looper.getMainLooper()
-                )
+
+                mLocationRequest?.let {
+                    fusedLocationProviderClient.requestLocationUpdates(
+                        it,
+                        mLocationCallback,
+                        Looper.getMainLooper()
+                    )
+                }
+
             }
         }
     }

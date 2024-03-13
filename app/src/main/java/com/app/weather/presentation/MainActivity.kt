@@ -78,19 +78,20 @@ class MainActivity : ComponentActivity(), LocationHelper.OnLocationCompleteListe
             CustomLoadingOverlay()
         }
 
+        //observe on refresh location button click
         homeViewModel.isRefreshedCalledLiveData.observe(this){
             setContent {
-                mainContent()
+                MainContent()
             }
         }
 
+        //observe updates from location
         homeViewModel.isLocationUpdated.observeOnce(this) {
             if (it) {
                 setContent {
-                    mainContent()
+                    MainContent()
                 }
             }
-
         }
 
         homeViewModel.errorLiveData.observe(this){
@@ -104,7 +105,7 @@ class MainActivity : ComponentActivity(), LocationHelper.OnLocationCompleteListe
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun mainContent(){
+    fun MainContent(){
         XWeatherTheme {
             // A surface container using the 'background' color from the theme
             val navController = rememberNavController()
@@ -246,7 +247,7 @@ class MainActivity : ComponentActivity(), LocationHelper.OnLocationCompleteListe
             floatingActionButton = {
                 FloatingActionButton(
                     onClick = {
-                        homeViewModel.refreshFavoriteLocationData(cityAddressGlobal, true)
+                        homeViewModel.refreshFavoriteLocationData(cityAddressGlobal, isRefreshedCalled = true, isGetLocationUpdate = false)
                               },
                     shape = CircleShape,
                 ) {
@@ -324,7 +325,7 @@ class MainActivity : ComponentActivity(), LocationHelper.OnLocationCompleteListe
     override fun getLocationUpdate(cityAddress: String?) {
             if (cityAddress != null) {
                     cityAddressGlobal = cityAddress
-                    homeViewModel.refreshFavoriteLocationData(cityAddress ?: null)
+                    homeViewModel.refreshFavoriteLocationData(cityAddress, isGetLocationUpdate = true, isRefreshedCalled = false)
                 } else {
                 Toast.makeText(
                     this,

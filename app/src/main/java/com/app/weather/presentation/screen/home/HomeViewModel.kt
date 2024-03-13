@@ -32,6 +32,7 @@ open class HomeViewModel @Inject constructor(
     val forecastedWeatherData: MutableLiveData<List<WeatherData.Daily>> = MutableLiveData()
     val isLocationUpdated: MutableLiveData<Boolean> = MutableLiveData()
     val isRefreshedCalledLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    private val _isGetLocationUpdate: MutableLiveData<Boolean> = MutableLiveData()
     val errorLiveData: MutableLiveData<String> = MutableLiveData()
 
      private fun fetchDefaultLocationWeatherData(isRefreshedCalled:Boolean = false) {
@@ -95,16 +96,19 @@ open class HomeViewModel @Inject constructor(
 
     }
 
-
-
-     fun refreshFavoriteLocationData(deviceLocation: String?, isRefreshedCalled:Boolean =false) {
+     fun refreshFavoriteLocationData(deviceLocation: String?, isRefreshedCalled:Boolean =false, isGetLocationUpdate: Boolean  =false) {
          val cityAddress = deviceLocation
+         if(isGetLocationUpdate && _isGetLocationUpdate.value == true){
+             //we donnot need to make API call on each location update, we have refresh button to get updates
+             return
+         }
         viewModelScope.launch {
             val result = searchCityUseCase.invoke(cityAddress)
             when (result) {
                 is Result.Success -> {
                     val searchResultModel = result.data.firstOrNull()
                     if (searchResultModel == null) {
+                        errorLiveData.value = "Location data could not be determined"
                         Log.e("XWeather", "Location data could not be determined")
                     } else {
                         updateSavedLocationsUseCase.invoke(
@@ -129,6 +133,9 @@ open class HomeViewModel @Inject constructor(
                 }
             }
         }
+         if(isGetLocationUpdate && cityAddress!=null){
+             _isGetLocationUpdate.value = true
+         }
 
     }
 

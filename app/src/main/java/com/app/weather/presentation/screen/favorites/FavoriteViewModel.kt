@@ -29,18 +29,12 @@ class FavoriteViewModel @Inject constructor(
         dateState.value = DateUtil.getDateFromEpoch(getSystemCurrentTimeInMillisUseCase.invoke())
         refreshFavoriteData()
     }
-
-    fun onFavoriteItemClicked(data: FavoriteLocationModel) {
-
-    }
-
     private fun refreshFavoriteData() {
         if (getSavedLocationsUseCase.invoke().isEmpty()) return
         favoriteLocationDataList.value = getSavedLocationsUseCase.invoke()
         fetchWeatherData()
 
     }
-
     private fun fetchWeatherData() {
         viewModelScope.launch {
             getSavedLocationsUseCase.invoke().forEach {
