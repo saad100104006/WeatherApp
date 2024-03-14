@@ -4,18 +4,13 @@ A weather app that shows daily weather conditions, and weather forecasts, built 
 
 ### Screenshots
 
-<img width="319" alt="Screenshot 2024-03-13 at 2 24 59 PM" src="https://github.com/saad100104006/WeatherApp/assets/8910479/18f0fd5b-936c-45f4-8fd4-478710612239">
-<img width="321" alt="Screenshot 2024-03-13 at 2 25 10 PM" src="https://github.com/saad100104006/WeatherApp/assets/8910479/3e1ba3c4-66f8-4581-8ad7-2c0622e5faca">
-<img width="319" alt="Screenshot 2024-03-13 at 2 24 31 PM" src="https://github.com/saad100104006/WeatherApp/assets/8910479/4bd7bd7f-171a-44d1-add7-8f983b62b2f2">
-<img width="319" alt="Screenshot 2024-03-13 at 2 24 40 PM" src="https://github.com/saad100104006/WeatherApp/assets/8910479/9e724cdf-6b3c-46cf-9436-c5169fe260bf">
+<img width="277" alt="Screenshot 2024-03-14 at 2 00 02 PM" src="https://github.com/saad100104006/WeatherApp/assets/8910479/c23dbeec-a23e-403e-8ea2-d057de5338d7">
+<img width="279" alt="Screenshot 2024-03-14 at 2 00 26 PM" src="https://github.com/saad100104006/WeatherApp/assets/8910479/66689fd1-f4d4-419a-b90c-5fb7f8ce644c">
 
 ### Recording
 
 
-
-https://github.com/saad100104006/WeatherApp/assets/8910479/d7eb398e-27e2-45ed-add1-2bee9037ae66
-
-
+https://github.com/saad100104006/WeatherApp/assets/8910479/561a4038-ef18-4772-9544-c448840b6656
 
 
 
@@ -86,7 +81,7 @@ This project uses API data from [weatherapi.com](https://www.weatherapi.com/)
 
 ### Setup Instruction
 You can setup/run the project in two ways - either by downloading the project and compiling locally using Android Studio or by downloading the APK from Google Drive
-https://drive.google.com/file/d/1YvIApfEBcd5_b4qB3eoYANFaLGf6AXRd/view?usp=sharing
+https://drive.google.com/file/d/1HtTkQIL6nRHNFngQj3_Yc06j18syRJy1/view?usp=sharing
 
 
 #### Run the project locally
