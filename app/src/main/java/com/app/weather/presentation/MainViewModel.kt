@@ -7,7 +7,6 @@ import com.app.weather.domain.models.FavoriteLocationModel
 class MainViewModel
 : ViewModel() {
     val onNavigateToSearch: MutableLiveData<Boolean> = MutableLiveData(false)
-    val onNavigateToFavorites: MutableLiveData<Boolean> = MutableLiveData(false)
     val onNavigateBack: MutableLiveData<Boolean> = MutableLiveData(false)
     val onShowWeatherDetail: MutableLiveData<FavoriteLocationModel> = MutableLiveData()
 
@@ -17,14 +16,6 @@ class MainViewModel
 
     fun onNavigateToSearchResolved() {
         onNavigateToSearch.value = false
-    }
-
-    fun onNavigateToFavorites() {
-        onNavigateToFavorites.value = true
-    }
-
-    fun onNavigateToFavoritesResolved() {
-        onNavigateToFavorites.value = false
     }
 
     fun onNavigateBack() {

@@ -52,7 +52,7 @@ fun WeatherDetailScreen(
     paddingValues: PaddingValues,
     onAppBarStartIconTapped: () -> Unit,
     onAppBarEndIconTapped: () -> Unit,
-    appbarStartIcon: ImageVector,
+    appbarStartIcon: ImageVector? = null,
     appbarEndIcon: ImageVector? = null
 ) {
     Scaffold(
@@ -76,7 +76,7 @@ fun Screen(
     paddingValues: PaddingValues,
     onAppBarEndIconTapped: () -> Unit,
     onAppbarStartIconTapped: () -> Unit,
-    appbarStartIcon: ImageVector,
+    appbarStartIcon: ImageVector?,
     appbarEndIcon: ImageVector?
 ) {
     Column(modifier = Modifier.padding(paddingValues)) {

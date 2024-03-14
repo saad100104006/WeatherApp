@@ -17,7 +17,7 @@ import com.app.weather.R
 @Composable
 fun CenterContentTopAppBar(
     title: @Composable () -> Unit,
-    startIcon: ImageVector,
+    startIcon: ImageVector? = null,
     startIconContentDescription: String = stringResource(id = R.string.content_description_none),
     onStartIconClicked: () -> Unit,
     endIcon: ImageVector? = null,
@@ -29,7 +29,7 @@ fun CenterContentTopAppBar(
         title = title,
         navigationIcon = {
             IconButton(onClick = onStartIconClicked) {
-                Icon(imageVector = startIcon, contentDescription = startIconContentDescription)
+                startIcon?.let { Icon(imageVector = it, contentDescription = startIconContentDescription) }
             }
         },
         actions = {

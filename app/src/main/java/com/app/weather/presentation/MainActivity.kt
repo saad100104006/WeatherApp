@@ -52,8 +52,6 @@ import com.app.weather.infrastructure.util.observeAsAction
 import com.app.weather.infrastructure.util.observeOnce
 import com.app.weather.presentation.framework.theme.XWeatherTheme
 import com.app.weather.presentation.screen.WeatherNavigationRoute
-import com.app.weather.presentation.screen.favorites.FavoriteScreen
-import com.app.weather.presentation.screen.favorites.FavoriteViewModel
 import com.app.weather.presentation.screen.home.HomeViewModel
 import com.app.weather.presentation.screen.home.WeatherDetailScreen
 import com.app.weather.presentation.screen.search.SearchScreen
@@ -120,7 +118,6 @@ class MainActivity : ComponentActivity(), LocationHelper.OnLocationCompleteListe
                         HomeScreenPage(
                             paddingValues = it,
                             onSearchIconTapped = mainViewModel::onNavigateToSearch,
-                            onLocationIconTapped = mainViewModel::onNavigateToFavorites,
                             weatherDataState = homeViewModel.forecastedWeatherData.observeAsState(),
                         )
                     }
@@ -146,20 +143,6 @@ class MainActivity : ComponentActivity(), LocationHelper.OnLocationCompleteListe
                         )
                     }
                 }
-                composable(WeatherNavigationRoute.Favorite.getName()) {
-                    val viewModel = hiltViewModel<FavoriteViewModel>()
-                    Scaffold {
-                        FavoriteScreenPage(
-                            paddingValues = it,
-                            onBackIconClicked = mainViewModel::onNavigateBack,
-                            dateState = viewModel.dateState.observeAsState(),
-                            favoriteLocationDataList = viewModel.favoriteLocationDataList.observeAsState(),
-                            onFavoriteItemTapped = { favoriteLocationModel ->
-                                mainViewModel.onShowWeatherDetail(favoriteLocationModel)
-                            },
-                        )
-                    }
-                }
                 composable(
                     route = WeatherNavigationRoute.SearchResult.getName(), arguments =
                     WeatherNavigationRoute.SearchResult.args
@@ -171,7 +154,6 @@ class MainActivity : ComponentActivity(), LocationHelper.OnLocationCompleteListe
                             onNavigateBack = mainViewModel::onNavigateBack,
                             weatherDataState = viewModel.forecastedWeatherData.observeAsState(),
                             onSaveLocationTapped = viewModel::onSaveLocationTapped,
-                            appBarEndIcon = viewModel.favoriteIcon.observeAsState()
                         )
                     }
                 }
@@ -197,15 +179,6 @@ class MainActivity : ComponentActivity(), LocationHelper.OnLocationCompleteListe
             },
             onActionResolved = mainViewModel::onNavigateToSearchResolved
         )
-        mainViewModel.onNavigateToFavorites.observeAsAction(
-            lifecycleOwner = this,
-            action = {
-                navController.navigate(
-                    WeatherNavigationRoute.Favorite.getName()
-                )
-            },
-            onActionResolved = mainViewModel::onNavigateToFavoritesResolved
-        )
         mainViewModel.onNavigateBack.observeAsAction(
             lifecycleOwner = this,
             action = {
@@ -217,30 +190,9 @@ class MainActivity : ComponentActivity(), LocationHelper.OnLocationCompleteListe
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    private fun FavoriteScreenPage(
-        paddingValues: PaddingValues,
-        onBackIconClicked: () -> Unit,
-        dateState: State<String?>,
-        favoriteLocationDataList: State<List<FavoriteLocationModel>?>,
-        onFavoriteItemTapped: (favoriteLocationModel: FavoriteLocationModel) -> Unit
-    ) {
-
-        FavoriteScreen(
-            paddingValues = paddingValues,
-            onBackIconClicked = onBackIconClicked,
-            dateState = dateState,
-            favoriteLocationDataList = favoriteLocationDataList,
-            onFavoriteItemTapped = onFavoriteItemTapped,
-        )
-
-    }
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
     private fun HomeScreenPage(
         paddingValues: PaddingValues,
         onSearchIconTapped: () -> Unit,
-        onLocationIconTapped: () -> Unit,
         weatherDataState: State<List<WeatherData.Daily>?>
     ) {
         Scaffold(modifier = Modifier.padding(paddingValues),
@@ -262,9 +214,8 @@ class MainActivity : ComponentActivity(), LocationHelper.OnLocationCompleteListe
             WeatherDetailScreen(
                 weatherDataState = weatherDataState,
                 paddingValues = it,
-                onAppBarStartIconTapped = onLocationIconTapped,
+                onAppBarStartIconTapped = {},
                 onAppBarEndIconTapped = onSearchIconTapped,
-                appbarStartIcon = ImageVector.vectorResource(id = R.drawable.ic_map),
                 appbarEndIcon = ImageVector.vectorResource(id = R.drawable.ic_search)
             )
 
@@ -277,8 +228,7 @@ class MainActivity : ComponentActivity(), LocationHelper.OnLocationCompleteListe
         paddingValues: PaddingValues,
         onNavigateBack: () -> Unit,
         weatherDataState: State<List<WeatherData.Daily>?>,
-        onSaveLocationTapped: () -> Unit,
-        appBarEndIcon: State<Int?>
+        onSaveLocationTapped: () -> Unit
     ) {
 
         Scaffold(modifier = Modifier.padding(paddingValues)) { it ->
@@ -287,10 +237,7 @@ class MainActivity : ComponentActivity(), LocationHelper.OnLocationCompleteListe
                 paddingValues = it,
                 onAppBarStartIconTapped = onNavigateBack,
                 appbarStartIcon = ImageVector.vectorResource(id = R.drawable.ic_back),
-                onAppBarEndIconTapped = onSaveLocationTapped,
-                appbarEndIcon = ImageVector.vectorResource(
-                    id = appBarEndIcon.value ?: R.drawable.ic_heart
-                ),
+                onAppBarEndIconTapped = onSaveLocationTapped
             )
 
         }

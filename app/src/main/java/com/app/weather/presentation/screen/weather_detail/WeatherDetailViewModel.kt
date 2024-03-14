@@ -1,10 +1,9 @@
 package com.app.weather.presentation.screen.weather_detail
 
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import com.app.weather.R
 import com.app.weather.domain.models.FavoriteLocationModel
 import com.app.weather.domain.usecases.device.DeleteSavedLocationUseCase
 import com.app.weather.domain.usecases.device.GetDefaultSavedLocationUseCase
@@ -28,7 +27,6 @@ class WeatherDetailViewModel @Inject constructor(
     getDefaultSavedLocationUseCase: GetDefaultSavedLocationUseCase,
     updateSavedLocationsUseCase: UpdateSavedLocationsUseCase,
     val deleteSavedLocationUseCase: DeleteSavedLocationUseCase,
-
     searchCityUseCase: SearchCityUseCase
 
 ) : HomeViewModel(
@@ -47,8 +45,6 @@ class WeatherDetailViewModel @Inject constructor(
         fetchWeatherDetail()
     }
 
-    val favoriteIcon: MutableLiveData<Int> = MutableLiveData(R.drawable.ic_heart)
-
     private fun fetchWeatherDetail() {
 
         val locationString: String =
@@ -60,20 +56,6 @@ class WeatherDetailViewModel @Inject constructor(
                 fetchHourlyForecastDataUseCase.invoke(favoriteLocationModel.getDisplayName(), 5)
             if (response is com.app.weather.domain.Result.Success) {
                 filterForecastedWeatherResult(response.data)
-                checkIfIsFavorite(response.data.firstOrNull()?.getIdentifier() ?: "")
-            }
-        }
-    }
-
-    private fun checkIfIsFavorite(locationIdentifier: String) {
-        val currentlySavedLocations = getSavedLocationsUseCase.invoke()
-        currentlySavedLocations.firstOrNull() {
-            it.getIdentifier() == locationIdentifier
-        }.apply {
-            if (this != null) {
-                favoriteIcon.value = R.drawable.ic_heart_filled
-            } else {
-                favoriteIcon.value = R.drawable.ic_heart
             }
         }
     }
@@ -88,9 +70,7 @@ class WeatherDetailViewModel @Inject constructor(
             } else {
                 deleteSavedLocationUseCase.invoke(listOf(favoriteLocationModel))
             }
-            checkIfIsFavorite(favoriteLocationModel.getIdentifier())
 
         }
     }
-
 }
