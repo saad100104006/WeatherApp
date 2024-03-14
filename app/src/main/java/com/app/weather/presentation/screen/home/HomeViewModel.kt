@@ -35,7 +35,14 @@ open class HomeViewModel @Inject constructor(
     private val _isGetLocationUpdate: MutableLiveData<Boolean> = MutableLiveData()
     val errorLiveData: MutableLiveData<String> = MutableLiveData()
 
-     private fun fetchDefaultLocationWeatherData(isRefreshedCalled:Boolean = false) {
+    init {
+        if (getDefaultSavedLocationUseCase.invoke() != null) {
+            fetchDefaultLocationWeatherData()
+        }
+    }
+
+
+    private fun fetchDefaultLocationWeatherData(isRefreshedCalled:Boolean = false) {
         val location = getDefaultSavedLocationUseCase.invoke()
         val searchString = "${location?.name} ${location?.country}"
         viewModelScope.launch {

@@ -61,7 +61,7 @@ class LocationHelper(
                 location.latitude,
                 location.longitude, 1
             )
-            if (addresses!!.size > 0) {
+            if (!addresses.isNullOrEmpty()) {
                 return addresses.firstOrNull()?.locality
             }
         } catch (e: IOException) {
