@@ -12,7 +12,11 @@ A weather app that shows daily weather conditions, and weather forecasts, built 
 ### Recording
 
 
-https://github.com/saad100104006/WeatherApp/assets/8910479/f9243205-da98-41ca-8375-b2051d95fd25
+
+https://github.com/saad100104006/WeatherApp/assets/8910479/d7eb398e-27e2-45ed-add1-2bee9037ae66
+
+
+
 
 
 
@@ -81,8 +85,8 @@ This project uses API data from [weatherapi.com](https://www.weatherapi.com/)
 
 
 ### Setup Instruction
-You can setup/run the project in two ways - either by downloading the project and compiling locally using Android Studio or by downloading this apk from google drive
-https://drive.google.com/file/d/10eo_hsixdD8_UCNDX_RUW0ps-nnB2CFI/view?usp=sharing
+You can setup/run the project in two ways - either by downloading the project and compiling locally using Android Studio or by downloading the APK from Google Drive
+https://drive.google.com/file/d/1YvIApfEBcd5_b4qB3eoYANFaLGf6AXRd/view?usp=sharing
 
 
 #### Run the project locally
@@ -90,7 +94,7 @@ https://drive.google.com/file/d/10eo_hsixdD8_UCNDX_RUW0ps-nnB2CFI/view?usp=shari
 > Make sure you have all the local dependencies setup i.e Android Studio & the Android SDK, [check here](https://developer.android.com/studio/install)
 > The Android Studio Version Android Studio Hedgehog | 2023.1.1 Patch 2 has been used to build this project
 > JDK version 17.0.7 has been used
-> After install if you face issues in fetching weather data, please change the API_KEY from WeatherDataSource, genarate your own token from weatherapi and replace the existing token with your token.
+> After installation if you face issues in fetching weather data, please change the API_KEY from WeatherDataSource, generate your own token from weather API and replace the existing token with your token.
 
 - First off, `git clone` this project
     - `git clone https://github.com/bijaykumarpun/weather-app-clean-architecture`
